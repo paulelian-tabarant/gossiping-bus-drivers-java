@@ -69,17 +69,15 @@ public class GossipingTest {
         assertEquals("3", duration);
     }
 
-    /*
     @Test
-    void firstTest() {
+    void whenOneBusEncountersTheTwoOthersAndReEncountersOneOfThemItShouldReturnTheIndexWhenHeDidThisLastEncounter() {
         List<String> routes = List.of(
-                "1 2 3",
-                "2 3 4"
+                "3 1 2 3 3",
+                "3 2 3 1 3",
+                "4 2 3 4 5"
         );
-        Gossiping gossiping = new Gossiping();
         String duration = gossiping.computeDuration(routes);
 
-        assertEquals("never", duration);
+        assertEquals("5", duration);
     }
-*/
 }

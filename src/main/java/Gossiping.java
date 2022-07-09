@@ -3,30 +3,37 @@ import java.util.List;
 
 public class Gossiping {
     public String computeDuration(List<String> routes) {
-        int firstStopsLength = routes.get(0).trim().length();
+        int stopsLength = getStopsLength(routes);
 
         Integer gossipedSize = routes.size() == 2 ? 1 : 3;
-        List<Boolean> gossiped = new ArrayList<Boolean>(gossipedSize);
+        List<Boolean> gossipedRecord = new ArrayList<Boolean>(gossipedSize);
         for (int i = 1; i <= gossipedSize; i++)
-            gossiped.add(false);
+            gossipedRecord.add(false);
 
-        for (int i = 1; i < firstStopsLength; i++) {
+        for (int i = 1; i <= stopsLength; i++) {
             if (sameStop(routes.get(0), routes.get(1), i)) {
-                gossiped.set(0, true);
+                gossipedRecord.set(0, true);
             }
             if (routes.size() > 2) {
+                if (sameStop(routes.get(0), routes.get(1), i)) {
+                    gossipedRecord.set(0, true);
+                }
                 if (sameStop(routes.get(1), routes.get(2), i)) {
-                    gossiped.set(1, true);
+                    gossipedRecord.set(1, true);
                 }
                 if (sameStop(routes.get(0), routes.get(2), i)) {
-                    gossiped.set(2, true);
+                    gossipedRecord.set(2, true);
                 }
             }
 
-            if (!gossiped.contains(false))
+            if (!gossipedRecord.contains(false))
                 return Integer.toString(i);
         }
         return "never";
+    }
+
+    private int getStopsLength(List<String> routes) {
+        return routes.get(0).length() / 2 + 1;
     }
 
     private char getStop(String stops, int stopIndex) {
