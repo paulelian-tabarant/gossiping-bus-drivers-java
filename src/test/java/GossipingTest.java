@@ -1,10 +1,9 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GossipingTest {
     private final Gossiping gossiping = new Gossiping();
@@ -70,6 +69,7 @@ public class GossipingTest {
     }
 
     @Test
+    @DisplayName("When one bus encounters the two others and re-encounters one of them, it should return the index when he did the last encounter")
     void whenOneBusEncountersTheTwoOthersAndReEncountersOneOfThemItShouldReturnTheIndexWhenHeDidThisLastEncounter() {
         List<String> routes = List.of(
                 "3 1 2 3 3",
