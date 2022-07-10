@@ -42,4 +42,16 @@ public class GossipedRecord {
             gossipedRecord[firstDriver][otherDriver] = true;
         }
     }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (int i = 0; i < gossipedSize; i++) {
+            for (int j = 0; j < gossipedSize; j++) {
+                output += (gossipedRecord[i][j] ? 1 : 0) + "  ";
+            }
+            output += '\n';
+        }
+        return output;
+    }
 }

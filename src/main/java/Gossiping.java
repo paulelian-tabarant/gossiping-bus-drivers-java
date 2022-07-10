@@ -1,27 +1,26 @@
 import java.util.List;
 
 public class Gossiping {
-    public String computeDuration(List<String> routes) {
-        GossipedRecord gossipedRecord = new GossipedRecord(routes.size());
-        Routes routesObj = new Routes(routes);
+    public String computeDuration(List<String> routesInput) {
+        GossipedRecord gossipedRecord = new GossipedRecord(routesInput.size());
+        Routes routes = new Routes(routesInput);
 
-        int stopsLength = routesObj.getStopsLength();
+        int stopsLength = routes.getStopsLength();
 
         for (int stopCount = 1; stopCount <= stopsLength; stopCount++) {
-            if (routesObj.sameStop(0, 1, stopCount)) {
-                gossipedRecord.setDriversMet(0, 1);
-            }
-            if (routes.size() > 2) {
-                if (routesObj.sameStop(0, 1, stopCount)) {
-                    gossipedRecord.update(0, 1, 2);
-                }
-                if (routesObj.sameStop(1, 2, stopCount)) {
-                    gossipedRecord.update(1, 2, 0);
-                }
-                if (routesObj.sameStop(0, 2, stopCount)) {
-                    gossipedRecord.update(0, 2, 1);
+            for (int driver = 0; driver < routesInput.size(); driver++) {
+                for (int otherDriver = 0; otherDriver < routesInput.size(); otherDriver++) {
+                    if (driver == otherDriver) continue;
+
+                    if (routes.sameStop(driver, otherDriver, stopCount)) {
+                        for (int otherDriver2 = 0; otherDriver2 < routesInput.size(); otherDriver2++)
+                            gossipedRecord.update(driver, otherDriver, otherDriver2);
+                    }
                 }
             }
+
+            System.out.println(">> Stop number " + stopCount + " :");
+            System.out.println(gossipedRecord);
 
             if (gossipedRecord.isComplete()) return Integer.toString(stopCount);
         }
