@@ -9,7 +9,6 @@ public class GossipingTest {
     private final Gossiping gossiping = new Gossiping();
 
     // Two buses that encounter, or not
-
     @Test
     void gossiped() {
         List<String> routes = List.of(
@@ -20,7 +19,6 @@ public class GossipingTest {
 
         assertEquals("1", duration);
     }
-
     @Test
     void neverGossiped() {
         List<String> routes = List.of(
@@ -31,7 +29,6 @@ public class GossipingTest {
 
         assertEquals("never", duration);
     }
-
     @Test
     void gossiped5() {
         List<String> routes = List.of(
@@ -55,7 +52,6 @@ public class GossipingTest {
 
         assertEquals("never", duration);
     }
-
     @Test
     void whenEveryBusEncountersTheOtherOnesInAStopTheyAllHadTimeToGossip() {
         List<String> routes = List.of(
@@ -67,7 +63,6 @@ public class GossipingTest {
 
         assertEquals("3", duration);
     }
-
     @Test
     @DisplayName("When one bus encounters the two others and re-encounters one of them, it should return the index when he did the last encounter")
     void whenOneBusEncountersTheTwoOthersAndReEncountersOneOfThemItShouldReturnTheIndexWhenHeDidThisLastEncounter() {
@@ -81,6 +76,7 @@ public class GossipingTest {
         assertEquals("5", duration);
     }
 
+    // Extend behaviour to five buses
     @Test
     @DisplayName("When five buses have all gossiped after 7 days, it should return 7")
     void whenFiveBusesHaveAllGossipedAfter7DaysItShouldReturn7() {
