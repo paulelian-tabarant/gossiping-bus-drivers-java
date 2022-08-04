@@ -11,7 +11,7 @@ public class GossipedRecord {
         for (int i = 1; i <= gossipedSize; i++) {
             for (int j = 1; j <= gossipedSize; j++) {
                 if (i == j) {
-                    gossipedRecord[i - 1][j - 1] = true;
+                    setDriversGossiped(i - 1, j - 1);
                     continue;
                 }
                 gossipedRecord[i - 1][j - 1] = false;
@@ -28,19 +28,21 @@ public class GossipedRecord {
     }
 
     public void setDriversMet(int firstDriver, int secondDriver) {
-        gossipedRecord[firstDriver][secondDriver] = true;
-        gossipedRecord[secondDriver][firstDriver] = true;
+        setDriversGossiped(firstDriver, secondDriver);
+        setDriversGossiped(secondDriver, firstDriver);
+
+        for (int otherDriver = 0; otherDriver < gossipedSize; otherDriver++) {
+            if (gossipedRecord[firstDriver][otherDriver]) {
+                setDriversGossiped(secondDriver, otherDriver);
+            }
+            if (gossipedRecord[secondDriver][otherDriver]) {
+                setDriversGossiped(firstDriver, otherDriver);
+            }
+        }
     }
 
-    public void update(int firstDriver, int secondDriver, int otherDriver) {
-        setDriversMet(firstDriver, secondDriver);
-
-        if (gossipedRecord[firstDriver][otherDriver]) {
-            gossipedRecord[secondDriver][otherDriver] = true;
-        }
-        if (gossipedRecord[secondDriver][otherDriver]) {
-            gossipedRecord[firstDriver][otherDriver] = true;
-        }
+    private void setDriversGossiped(int secondDriver, int otherDriverTmp) {
+        gossipedRecord[secondDriver][otherDriverTmp] = true;
     }
 
     @Override

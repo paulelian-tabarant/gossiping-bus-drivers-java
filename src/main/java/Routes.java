@@ -6,6 +6,8 @@ public class Routes {
         this.routes = routes;
     }
 
+    public int size() { return routes.size(); }
+
     public int getStopsLength() {
         return routes.get(0).length() / 2 + 1;
     }

@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -105,6 +106,23 @@ public class GossipingTest {
             String duration = gossiping.computeDuration(routes);
 
             assertEquals("7", duration);
+        }
+    }
+
+    @Nested
+    class NStops {
+        @Test
+        @Disabled
+        @DisplayName("to be named")
+        void toBeNamed() {
+            List<String> routes = List.of(
+                    "3 1 2 3",
+                    "3 2 3 1",
+                    "4 2 3 4 5"
+            );
+            String duration = gossiping.computeDuration(routes);
+
+            assertEquals("5", duration);
         }
     }
 }
